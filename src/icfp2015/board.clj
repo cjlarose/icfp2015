@@ -14,13 +14,19 @@
     :filled filled
     :current-unit initial-unit })
 
+(defn translate [dx dy]
+  (fn [unit]
+    (let [f (fn [[x y]] [(+ x dx) (+ y dy)])]
+      { :members (set (map f (:members unit)))
+        :pivot (f (:pivot unit)) })))
+
 ; these are possible commands
 ; [ [:move :west] [:move :east] [:move :southwest] [:move :southeast]
 ;   [:rotate :clockwise] [:rotate :counterclockwise] ]
 (defn transition-board
   "Given a board and command, returns a new board. Raises if performing
   the command puts the board into an illegal state"
-  [board command]
+  [board [command direction]]
   nil)
 
 (defn lock-and-spawn
