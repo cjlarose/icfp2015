@@ -91,7 +91,7 @@
                            :height 5
                            :filled #{} } ]
       (is (= expected-board actual-board))))
-  (testing "even rows moved southeast"
+  (testing "even rows move southeast"
     (let [board { :width 3
                   :height 5
                   :filled #{ [4 0] [4 1] [4 2] [0 0] [0 2] } }
@@ -99,4 +99,13 @@
           expected-board { :width 3
                            :height 5
                            :filled #{ [1 0] [1 2] } } ]
+      (is (= expected-board actual-board))))
+  (testing "odd rows move southwest"
+    (let [board { :width 3
+                  :height 5
+                  :filled #{ [4 0] [4 1] [4 2] [1 0] [1 2] } }
+          actual-board (clear-rows board)
+          expected-board { :width 3
+                           :height 5
+                           :filled #{ [2 0] [2 2] } } ]
       (is (= expected-board actual-board)))))

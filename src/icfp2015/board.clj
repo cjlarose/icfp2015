@@ -64,7 +64,6 @@
                      (let [[above below] (partition-cells cells i)]
                        (union
                          below
-                         ;; TODO: Replace with (tranlate (if (even? i) :southeast :southwest))
                          (set (map (fn [[ii jj]] [(inc ii) jj]) above)))))
         new-filled (reduce remove-row filled filled-rows)]
     (assoc board :filled new-filled)))
