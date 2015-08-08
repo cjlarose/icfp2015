@@ -65,7 +65,7 @@
                        (union
                          below
                          ;; TODO: Replace with (tranlate (if (even? i) :southeast :southwest))
-                         (map (fn [[ii jj]] [ii (inc jj)]) above))))
+                         (set (map (fn [[ii jj]] [(inc ii) jj]) above)))))
         new-filled (reduce remove-row filled filled-rows)]
     (assoc board :filled new-filled)))
 
