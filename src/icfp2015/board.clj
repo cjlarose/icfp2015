@@ -24,7 +24,7 @@
 (defn current-unit-in-bounds?
   "Is the current unit of a board within the bounds of the board"
   [{:keys [width height current-unit]}]
-  (let [in-board? (fn [[x y]] (and (>= x 0) (< x width) (>= y 0) (< y height)))]
+  (let [in-board? (fn [[i j]] (and (>= j 0) (< j width) (>= i 0) (< i height)))]
     (every? in-board? (:members current-unit))))
 
 (defn valid-position? [board]

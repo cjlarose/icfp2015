@@ -20,20 +20,20 @@
 
 (deftest bounds-test
   (testing "in bounds"
-    (let [board { :width 10
-                  :height 15
-                  :current-unit { :members #{ [ 5 5 ] [ 6 6 ] [ 0 0 ] [ 9 14 ] }
+    (let [board { :height 15
+                  :width 10
+                  :current-unit { :members #{ [ 5 5 ] [ 6 6 ] [ 0 0 ] [ 9 9 ] }
                                   :pivot [ 5 4 ] } }]
       (is (current-unit-in-bounds? board))))
   (testing "over east bounds"
-    (let [board { :width 10
-                  :height 15
-                  :current-unit { :members #{ [ 5 5 ] [ 6 6 ] [ 0 0 ] [ 10 14 ] }
+    (let [board { :height 15
+                  :width 10
+                  :current-unit { :members #{ [ 5 5 ] [ 6 6 ] [ 0 0 ] [ 5 10 ] }
                                   :pivot [ 5 4 ] } }]
       (is (false? (current-unit-in-bounds? board)))))
   (testing "over south bounds"
-    (let [board { :width 10
-                  :height 15
+    (let [board { :height 15
+                  :width 10
                   :current-unit { :members #{ [ 5 5 ] [ 6 6 ] [ 0 0 ] [ 9 15 ] }
                                   :pivot [ 5 4 ] } }]
       (is (false? (current-unit-in-bounds? board))))))
