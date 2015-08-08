@@ -26,5 +26,14 @@
                                :pivot { :x 6 :y 1 } } 
                              { :members [ { :x 4 :y 7 } { :x 11 :y 8 } ]
                                :pivot { :x 4 :y 2 } } ] }
-          games (get-games problem)]
-      (is (= 2 (+ 1 1))))))
+          actual-games (get-games problem)
+          expected-games [ { :width 10
+                             :height 15
+                             :filled #{[5 4] [6 2]}
+                             :units '({ :members #{ [0 5] [1  2] } :pivot [0 0] }
+                                      { :members #{ [0 5] [1  2] } :pivot [0 0] }
+                                      { :members #{ [4 7] [11 8] } :pivot [4 2] }
+                                      { :members #{ [4 7] [11 8] } :pivot [4 2] }
+                                      { :members #{ [1 4] [11 6] } :pivot [6 1] }) } ]]
+      (is (= (nth expected-games 0) (nth actual-games 0)))
+      )))
