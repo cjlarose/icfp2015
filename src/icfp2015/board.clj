@@ -30,19 +30,6 @@
 (defn valid-position? [board]
   (and (not (has-collision? board)) (current-unit-in-bounds? board)))
 
-; these are possible commands
-; [ [:move :west] [:move :east] [:move :southwest] [:move :southeast]
-;   [:rotate :clockwise] [:rotate :counterclockwise] ]
-(defn transition-board
-  "Given a board and command, returns a new (possibly invalid) board"
-  [board [command direction]]
-  (if (= command :move)
-    (let [unit-fn (apply unit/translate (unit/translations direction))]
-      { :width (:width board)
-        :height (:height board)
-        :filled (:filled board)
-        :current-unit (unit-fn (:current-unit board)) })))
-
 (defn- lock-current-unit
   "Just merges the current unit into the locked cells"
   [{:keys [width height filled current-unit] :as board}]
@@ -69,9 +56,24 @@
         new-filled (reduce remove-row filled filled-rows)]
     (assoc board :filled new-filled)))
 
-(defn lock-and-spawn
+(defn- lock-and-spawn
   "Locks the current unit. Clears rows. Moves cells down. Spawns new unit.
   New board may be invalid due to spawn"
   [board new-unit]
   (let [new-board (clear-rows (lock-current-unit board))]
     (assoc new-board :current-unit new-unit)))
+
+; these are possible commands
+; [ [:move :west] [:move :east] [:move :southwest] [:move :southeast]
+;   [:rotate :clockwise] [:rotate :counterclockwise]
+;   [:lock next-unit] ]
+(defn transition-board
+  "Given a board and command, returns a new (possibly invalid) board"
+  [board [command arg]]
+  (case command
+    :move (let [unit-fn (apply unit/translate (unit/translations arg))]
+             { :width (:width board)
+               :height (:height board)
+               :filled (:filled board)
+               :current-unit (unit-fn (:current-unit board)) })
+    :lock (lock-and-spawn board arg)))

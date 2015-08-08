@@ -115,16 +115,17 @@
         (is (= expected-board actual-board))))))
 
 (deftest lock-and-spawn-test
-  (testing "locks and spawns"
-    (let [board { :width 3
-                  :height 5
-                  :filled #{ [4 0] [4 1] }
-                  :current-unit { :members #{ [ 4 2 ] [ 3 0 ] }
-                                  :pivot [3 1] } }
-          new-unit { :members #{ [0 0] } :pivot [ 0 1 ] }
-          actual-board (lock-and-spawn board new-unit)
-          expected-board { :width 3
-                           :height 5
-                           :filled #{ [4 0] }
-                           :current-unit new-unit }]
-      (is (= expected-board actual-board)))))
+  (let [lock-and-spawn #'board/lock-and-spawn]
+    (testing "locks and spawns"
+      (let [board { :width 3
+                    :height 5
+                    :filled #{ [4 0] [4 1] }
+                    :current-unit { :members #{ [ 4 2 ] [ 3 0 ] }
+                                    :pivot [3 1] } }
+            new-unit { :members #{ [0 0] } :pivot [ 0 1 ] }
+            actual-board (lock-and-spawn board new-unit)
+            expected-board { :width 3
+                             :height 5
+                             :filled #{ [4 0] }
+                             :current-unit new-unit }]
+        (is (= expected-board actual-board))))))
