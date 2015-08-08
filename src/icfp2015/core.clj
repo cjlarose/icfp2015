@@ -21,7 +21,7 @@
 (defn solve-game [game]
   { :problemId (:problemId game)
     :seed (:seed game)
-    :solution [""] })
+    :solution (apply str (repeat 3 "a")) })
 
 (def cli-options
   [["-f" "--file FILE" "Input filename"
