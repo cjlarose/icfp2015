@@ -16,12 +16,12 @@
     :filled filled
     :current-unit initial-unit })
 
-(defn has-collision?
+(defn- has-collision?
   "Does the current unit collide with filled cells?"
   [{:keys [filled current-unit]}]
   (not (= (count (intersection filled (:members current-unit))) 0)))
 
-(defn current-unit-in-bounds?
+(defn- current-unit-in-bounds?
   "Is the current unit of a board within the bounds of the board"
   [{:keys [width height current-unit]}]
   (let [in-board? (fn [[i j]] (and (>= j 0) (< j width) (>= i 0) (< i height)))]
@@ -43,7 +43,7 @@
         :filled (:filled board)
         :current-unit (unit-fn (:current-unit board)) })))
 
-(defn lock-current-unit
+(defn- lock-current-unit
   "Just merges the current unit into the locked cells"
   [{:keys [width height filled current-unit] :as board}]
   {:pre [(valid-position? board)]}
@@ -52,7 +52,7 @@
     :filled (union filled (:members current-unit))
     :current-unit nil })
 
-(defn clear-rows
+(defn- clear-rows
   "Clears full rows. Moves cells above cleared row downward"
   [{:keys [width height filled] :as board}]
   (let [row-is-filled (fn [i] (->> (range width)
