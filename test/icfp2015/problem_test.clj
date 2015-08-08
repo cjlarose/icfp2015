@@ -32,23 +32,23 @@
                              :filled #{[5 4] [6 2]}
                              :units '({ :members #{ [0 5] [1  2] } :pivot [0 0] }
                                       { :members #{ [0 5] [1  2] } :pivot [0 0] }
-                                      { :members #{ [4 7] [11 8] } :pivot [4 2] }
-                                      { :members #{ [4 7] [11 8] } :pivot [4 2] }
-                                      { :members #{ [1 4] [11 6] } :pivot [6 1] }) }
-                           { :width 10
-                             :height 15
-                             :filled #{[5 4] [6 2]}
-                             :units '({ :members #{ [0 5] [1  2] } :pivot [0 0] }
-                                      { :members #{ [1 4] [11 6] } :pivot [6 1] }
-                                      { :members #{ [1 4] [11 6] } :pivot [6 1] }
                                       { :members #{ [0 5] [1  2] } :pivot [0 0] }
-                                      { :members #{ [1 4] [11 6] } :pivot [6 1] }) }
+                                      { :members #{ [0 5] [1  2] } :pivot [0 0] }
+                                      { :members #{ [5 2] [0  1] } :pivot [0 1] }) }
                            { :width 10
                              :height 15
                              :filled #{[5 4] [6 2]}
                              :units '({ :members #{ [0 5] [1  2] } :pivot [0 0] }
                                       { :members #{ [4 7] [11 8] } :pivot [4 2] }
                                       { :members #{ [0 5] [1  2] } :pivot [0 0] }
+                                      { :members #{ [5 2] [0  1] } :pivot [0 1] }
+                                      { :members #{ [4 7] [11 8] } :pivot [4 2] }) }
+                           { :width 10
+                             :height 15
+                             :filled #{[5 4] [6 2]}
+                             :units '({ :members #{ [0 5] [1  2] } :pivot [0 0] }
+                                      { :members #{ [5 2] [0  1] } :pivot [0 1] }
+                                      { :members #{ [4 7] [11 8] } :pivot [4 2] }
                                       { :members #{ [1 4] [11 6] } :pivot [6 1] }
-                                      { :members #{ [0 5] [1  2] } :pivot [0 0] }) } ]]
+                                      { :members #{ [5 2] [0  1] } :pivot [0 1] }) } ]]
       (is (= expected-games actual-games)))))

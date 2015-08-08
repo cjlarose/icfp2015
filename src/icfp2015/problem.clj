@@ -37,10 +37,11 @@
                       { :members (set (map coord-to-vec members))
                         :pivot (coord-to-vec pivot) })
         formatted-units (map format-unit (:units problem))
+        num-units (count formatted-units)
         units (fn [seed] (->> seed
                               (source-sequence)
                               (take n)
-                              (map #(nth formatted-units (mod % n)))))
+                              (map #(nth formatted-units (mod % num-units)))))
         make-game (fn [seed]
                     { :width (:width problem)
                       :height (:height problem)
