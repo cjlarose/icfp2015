@@ -52,6 +52,23 @@
     :filled (union filled (:members current-unit))
     :current-unit nil })
 
+(defn clear-rows
+  [{:keys [width height filled] :as board}]
+  (let [row-is-filled (fn [i] (->> (range width)
+                                   (map (fn [j] [i j]))
+                                   (every? #(contains? filled %))))
+        filled-rows (filter row-is-filled (range height))
+        partition-cells (fn [cells i] [(set (filter (fn [[ii _]] (< ii i)) cells))
+                                       (set (filter (fn [[ii _]] (> ii i)) cells))])
+        remove-row (fn [cells i]
+                     (let [[above below] (partition-cells cells i)]
+                       (union
+                         below
+                         ;; TODO: Replace with (tranlate (if (even? i) :southeast :southwest))
+                         (map (fn [[ii jj]] [ii (inc jj)]) above))))
+        new-filled (reduce remove-row filled filled-rows)]
+    (assoc board :filled new-filled)))
+
 (defn lock-and-spawn
   "Locks the current unit. Clears rows. Moves cells down. Spawns new unit.
   Raises if new-unit cannot be spawned"
