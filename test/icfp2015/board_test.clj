@@ -3,5 +3,5 @@
             [icfp2015.board :refer :all]))
 
 (deftest make-board-test
-  (testing "Tnitial state"
+  (testing "Initial state"
     (is (= 1 1))))
