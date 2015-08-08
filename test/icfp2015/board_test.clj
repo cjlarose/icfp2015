@@ -7,12 +7,34 @@
     (is (= 1 1))))
 
 (deftest translation-test
-  (testing "move west"
+  (let [{:keys [west east southwest southeast]} translations]
+  (testing "translate west"
     (let [unit { :members #{ [0 0] [1 1] } :pivot [0 1] }
-          f    (translate -1 0)
+          f    (apply translate west)
           actual-unit (f unit)
           expected-unit { :members #{ [-1 0] [0 1] } :pivot [-1 1] }]
-      (is (= expected-unit actual-unit)))))
+      (is (= expected-unit actual-unit))))
+
+  (testing "translate east"
+    (let [unit { :members #{ [0 0] [1 1] } :pivot [0 1] }
+          f    (translate 1 0)
+          actual-unit (f unit)
+          expected-unit { :members #{ [1 0] [2 1] } :pivot [1 1] }]
+      (is (= expected-unit actual-unit))))
+
+  (testing "translate southwest"
+    (let [unit { :members #{ [0 0] [1 1] } :pivot [0 1] }
+          f    (translate 0 1)
+          actual-unit (f unit)
+          expected-unit { :members #{ [0 1] [1 2] } :pivot [0 2] }]
+      (is (= expected-unit actual-unit))))
+
+  (testing "translate southeast"
+    (let [unit { :members #{ [0 0] [1 1] } :pivot [0 1] }
+          f    (translate 1 1)
+          actual-unit (f unit)
+          expected-unit { :members #{ [1 1] [2 2] } :pivot [1 2] }]
+      (is (= expected-unit actual-unit))))))
 
 (deftest collistion-test
   (testing "does not have collision"
