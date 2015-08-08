@@ -32,11 +32,15 @@
   "Returns (count (:sourceSeeds problem)) games given a problem."
   [problem]
   (let [n (:sourceLength problem)
+        coord-to-vec (fn [{ :keys [x y] }] [x y])
+        format-unit (fn [{ :keys [members pivot] }]
+                      { :members (set (map coord-to-vec members))
+                        :pivot (coord-to-vec pivot) })
+        formatted-units (map format-unit (:units problem))
         units (fn [seed] (->> seed
                               (source-sequence)
                               (take n)
-                              (map #(nth (:units problem) (mod % n)))))
-        coord-to-vec (fn [{:keys [x y]}] [x y])
+                              (map #(nth formatted-units (mod % n)))))
         make-game (fn [seed]
                     { :width (:width problem)
                       :height (:height problem)
