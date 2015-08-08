@@ -22,12 +22,12 @@
 ;            { :members [ { :x 0 :y 1 } { :x 5 :y 2 } ]
 ;              :pivot { :x 0 :y 1 } } ] }
 ;
-; a game looks like this
+; A game looks like this. Notice coordinate pairs are just vectors now
 ; { :width 10
 ;   :height 10
-;   :filled [ { :x 5 :y 4 } { :x 6 :y 2 } ]
-;   :units [ { :members [ { :x 1 :y 2 } { :x 0 :y 5 } ]
-;              :pivot { :x 0 :y 0 } } ] }
+;   :filled #{ [ 5 4 ] [ 6 2 ] }
+;   :units [ { :members #{ [ 1 2 ] [ 0 5 ] }
+;              :pivot [ 0 0 ] } ] }
 (defn get-games
   "Returns (count (:sourceSeeds problem)) games given a problem."
   [problem]
