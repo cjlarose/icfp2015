@@ -38,6 +38,9 @@
   (let [in-board? (fn [[x y]] (and (>= x 0) (< x width) (>= y 0) (< y height)))]
     (every? in-board? (:members current-unit))))
 
+(defn valid-position? [board]
+  (and (not (has-collision? board)) (current-unit-in-bounds? board)))
+
 ; these are possible commands
 ; [ [:move :west] [:move :east] [:move :southwest] [:move :southeast]
 ;   [:rotate :clockwise] [:rotate :counterclockwise] ]
