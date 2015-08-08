@@ -1,13 +1,39 @@
 (ns icfp2015.core
-  (:require [clojure.data.json :as json])
+  (:require [clojure.data.json :as json]
+            [clojure.tools.cli :refer [parse-opts]]
+            [icfp2015.problem :refer [get-games]])
   (:gen-class))
 
-(defn load-json
-  "Parse JSON problems"
-  [json]
-  (json/read-str json :key-fn keyword))
+(defn get-solution [problem]
+  (let [games (get-games problem)
+        solve (fn [game]
+                { :problemId (:problemId game)
+                  :seed (:seed game)
+                  :solution [""] })]
+    (map solve games)))
+
+(defn read-games-from-file [f]
+  (-> f
+      (slurp)
+      (json/read-str :key-fn keyword)
+      (get-games)))
+
+(defn solve-game [game]
+  { :problemId (:problemId game)
+    :seed (:seed game)
+    :solution [""] })
+
+(def cli-options
+  [["-f" "--file FILE" "Input filename"
+    :id :input-files
+    :default []
+    :assoc-fn (fn [m k v] (update-in m [k] conj v))]])
 
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (load-json (last args)))
+  (let [args (parse-opts args cli-options)
+        input-files (get-in args [:options :input-files])
+        games (mapcat read-games-from-file input-files)
+        solutions (map solve-game games)]
+    (println (json/write-str solutions))))
