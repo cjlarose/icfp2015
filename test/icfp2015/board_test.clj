@@ -14,6 +14,18 @@
           expected-unit { :members #{ [-1 0] [0 1] } :pivot [-1 1] }]
       (is (= expected-unit actual-unit)))))
 
+(deftest collistion-test
+  (testing "does not have collision"
+    (let [board { :filled #{ [ 0 0 ] }
+                  :current-unit { :members #{ [ 5 0 ] [ 6 0 ] }
+                                  :pivot [ 0 0 ] } }]
+      (is (not (has-collision? board)))))
+  (testing "has collision"
+    (let [board { :filled #{ [ 6 0 ] }
+                  :current-unit { :members #{ [ 5 0 ] [ 6 0 ] }
+                                  :pivot [ 0 0 ] } }]
+      (is (has-collision? board)))))
+
 (deftest transition-board-test
   (testing "moving southwest"
     (let [board { :width 10

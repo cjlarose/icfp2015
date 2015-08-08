@@ -1,4 +1,5 @@
-(ns icfp2015.board)
+(ns icfp2015.board
+  (:require [clojure.set :refer [intersection]]))
 
 ; board state is represented as a current-unit together with its currently
 ; filled-and-locked cells
@@ -25,6 +26,11 @@
     :east [1 0]
     :southwest [0 1]
     :southeast [1 1] })
+
+(defn has-collision?
+  "Does the current unit collide with filled cells?"
+  [{:keys [filled current-unit]}]
+  (not (= (count (intersection filled (:members current-unit))) 0)))
 
 ; these are possible commands
 ; [ [:move :west] [:move :east] [:move :southwest] [:move :southeast]
