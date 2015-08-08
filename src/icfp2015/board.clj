@@ -71,6 +71,7 @@
 
 (defn lock-and-spawn
   "Locks the current unit. Clears rows. Moves cells down. Spawns new unit.
-  Raises if new-unit cannot be spawned"
+  New board may be invalid due to spawn"
   [board new-unit]
-  nil)
+  (let [new-board (clear-rows (lock-current-unit board))]
+    (assoc new-board :current-unit new-unit)))
