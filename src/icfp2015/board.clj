@@ -45,7 +45,7 @@
 ; [ [:move :west] [:move :east] [:move :southwest] [:move :southeast]
 ;   [:rotate :clockwise] [:rotate :counterclockwise] ]
 (defn transition-board
-  "Given a board and command, returns a new (possibly invalid board)"
+  "Given a board and command, returns a new (possibly invalid) board"
   [board [command direction]]
   (if (= command :move)
     (let [unit-fn (apply translate (translations direction))]
