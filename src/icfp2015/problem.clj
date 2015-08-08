@@ -25,6 +25,8 @@
 ; A game looks like this. Notice coordinate pairs are just vectors now
 ; { :width 10
 ;   :height 10
+;   :problemId 0
+;   :seed 17
 ;   :filled #{ [ 5 4 ] [ 6 2 ] }
 ;   :units [ { :members #{ [ 1 2 ] [ 0 5 ] }
 ;              :pivot [ 0 0 ] } ] }
@@ -45,6 +47,8 @@
         make-game (fn [seed]
                     { :width (:width problem)
                       :height (:height problem)
+                      :problemId (:id problem)
+                      :seed seed
                       :filled (set (map coord-to-vec (:filled problem)))
                       :units (units seed) })]
     (map make-game (:sourceSeeds problem))))

@@ -13,7 +13,8 @@
 
 (deftest get-games-test
   (testing "gets correct games"
-    (let [problem { :width 10
+    (let [problem { :id 124
+                    :width 10
                     :height 15
                     :sourceSeeds [ 0 17 5235 ]
                     :sourceLength 5
@@ -29,6 +30,8 @@
           actual-games (get-games problem)
           expected-games [ { :width 10
                              :height 15
+                             :problemId 124
+                             :seed 0
                              :filled #{[5 4] [6 2]}
                              :units '({ :members #{ [0 5] [1  2] } :pivot [0 0] }
                                       { :members #{ [0 5] [1  2] } :pivot [0 0] }
@@ -37,6 +40,8 @@
                                       { :members #{ [5 2] [0  1] } :pivot [0 1] }) }
                            { :width 10
                              :height 15
+                             :problemId 124
+                             :seed 17
                              :filled #{[5 4] [6 2]}
                              :units '({ :members #{ [0 5] [1  2] } :pivot [0 0] }
                                       { :members #{ [4 7] [11 8] } :pivot [4 2] }
@@ -45,6 +50,8 @@
                                       { :members #{ [4 7] [11 8] } :pivot [4 2] }) }
                            { :width 10
                              :height 15
+                             :problemId 124
+                             :seed 5235
                              :filled #{[5 4] [6 2]}
                              :units '({ :members #{ [0 5] [1  2] } :pivot [0 0] }
                                       { :members #{ [5 2] [0  1] } :pivot [0 1] }
