@@ -56,7 +56,7 @@
   [{:keys [width height filled] :as board}]
   (let [row-is-filled (fn [i] (->> (range width)
                                    (map (fn [j] [i j]))
-                                   (every? #(contains? filled %))))
+                                   (every? (partial contains? filled))))
         filled-rows (filter row-is-filled (range height))
         partition-cells (fn [cells i] [(set (filter (fn [[ii _]] (< ii i)) cells))
                                        (set (filter (fn [[ii _]] (> ii i)) cells))])
