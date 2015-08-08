@@ -31,4 +31,15 @@
 (defn get-games
   "Returns (count (:sourceSeeds problem)) games given a problem."
   [problem]
-  nil)
+  (let [n (:sourceLength problem)
+        units (fn [seed] (->> seed
+                              (source-sequence)
+                              (take n)
+                              (map #(nth (:units problem) (mod % n)))))
+        coord-to-vec (fn [{:keys [x y]}] [x y])
+        make-game (fn [seed]
+                    { :width (:width problem)
+                      :height (:height problem)
+                      :filled (set (map coord-to-vec (:filled problem)))
+                      :units (units seed) })]
+    (map make-game (:sourceSeeds problem))))
