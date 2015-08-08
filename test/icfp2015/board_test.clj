@@ -67,8 +67,8 @@
                   :current-unit { :members #{ [ 5 0 ] [ 6 5] }
                                   :pivot [ 0 0 ] } }
           expected-board { :width 10
-                         :height 15
-                         :filled #{ [6 6] [5 0] [6 5] }
-                         :current-unit nil }
+                           :height 15
+                           :filled #{ [6 6] [5 0] [6 5] }
+                           :current-unit nil }
           actual-board (lock-current-unit board)]
       (is (= expected-board actual-board)))))
