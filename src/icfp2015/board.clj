@@ -2,12 +2,17 @@
 
 ; board state is represented as a current-unit together with its currently
 ; filled-and-locked cells
-; e.g. { :current-unit { :members #{ [2 0] [0 1] [2 2] } :pivot [1 1] }
+; e.g. { :width 10
+;        :height 15
+;        :current-unit { :members #{ [2 0] [0 1] [2 2] } :pivot [1 1] }
 ;        :filled #{ [5 4] [4 3] } }
 (defn make-board
   "Creates a new new board with an initial-unit"
   [w h filled initial-unit]
-  nil)
+  { :width w
+    :height h
+    :filled filled
+    :current-unit initial-unit })
 
 ; these are possible commands
 ; [ [:move :west] [:move :east] [:move :southwest] [:move :southeast]
