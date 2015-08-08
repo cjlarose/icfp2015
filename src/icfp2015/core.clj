@@ -4,14 +4,6 @@
             [icfp2015.problem :refer [get-games]])
   (:gen-class))
 
-(defn get-solution [problem]
-  (let [games (get-games problem)
-        solve (fn [game]
-                { :problemId (:problemId game)
-                  :seed (:seed game)
-                  :solution [""] })]
-    (map solve games)))
-
 (defn read-games-from-file [f]
   (-> f
       (slurp)
