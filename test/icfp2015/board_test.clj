@@ -94,3 +94,21 @@
                            :current-unit nil }
           actual-board (lock-current-unit board)]
       (is (= expected-board actual-board)))))
+
+(deftest clear-rows-test
+  (testing "no rows cleared if no full rows"
+    (let [board { :width 5
+                  :height 5
+                  :filled #{ [0 0] [1 1] [2 2] [3 3] [4 4] } }
+          actual-board (clear-rows board)
+          expected-board board]
+      (is (= expected-board actual-board))))
+  (testing "rows cleared if full rows"
+    (let [board { :width 5
+                  :height 5
+                  :filled #{ [4 0] [4 1] [4 2] [4 3] [4 4] } }
+          actual-board (clear-rows board)
+          expected-board { :width 5
+                           :height 5
+                           :filled #{} } ]
+      (is (= expected-board actual-board)))))
