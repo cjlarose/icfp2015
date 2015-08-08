@@ -5,3 +5,24 @@
 (deftest make-board-test
   (testing "Initial state"
     (is (= 1 1))))
+
+(deftest translation-test
+  (testing "move west"
+    (let [unit { :members #{ [0 0] [1 1] } :pivot [0 1] }
+          f    (translate -1 0)
+          actual-unit (f unit)
+          expected-unit { :members #{ [-1 0] [0 1] } :pivot [-1 1] }]
+      (is (= expected-unit actual-unit)))))
+
+(deftest transition-board-test
+  (testing "moving southwest"
+    (let [board { :width 10
+                  :height 15
+                  :filled #{ [ 6 6 ] }
+                  :current-unit { :members #{ [ 5 0 ] } :pivot [6 0] } }
+          actual-board (transition-board board [:move :southwest])
+          expected-board { :width 10
+                           :height 15
+                           :filled #{ [ 6 6 ] }
+                           :current-unit { :members #{ [ 5 1 ] } :pivot [6 1] } }]
+      (is (= expected-board actual-board)))))

@@ -20,6 +20,12 @@
       { :members (set (map f (:members unit)))
         :pivot (f (:pivot unit)) })))
 
+(def translations
+  { :west [-1 0]
+    :east [1 0]
+    :southwest [0 1]
+    :southeast [1 1] })
+
 ; these are possible commands
 ; [ [:move :west] [:move :east] [:move :southwest] [:move :southeast]
 ;   [:rotate :clockwise] [:rotate :counterclockwise] ]
@@ -27,7 +33,12 @@
   "Given a board and command, returns a new board. Raises if performing
   the command puts the board into an illegal state"
   [board [command direction]]
-  nil)
+  (if (= command :move)
+    (let [unit-fn (apply translate (translations direction))]
+      { :width (:width board)
+        :height (:height board)
+        :filled (:filled board)
+        :current-unit (unit-fn (:current-unit board)) })))
 
 (defn lock-and-spawn
   "Locks the current unit. Clears rows. Moves cells down. Spawns new unit.
