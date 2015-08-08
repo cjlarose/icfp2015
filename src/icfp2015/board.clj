@@ -1,5 +1,5 @@
 (ns icfp2015.board
-  (:require [clojure.set :refer [intersection]]))
+  (:require [clojure.set :refer [intersection union]]))
 
 ; board state is represented as a current-unit together with its currently
 ; filled-and-locked cells
@@ -53,6 +53,15 @@
         :height (:height board)
         :filled (:filled board)
         :current-unit (unit-fn (:current-unit board)) })))
+
+(defn lock-current-unit
+  "Just merges the current unit into the locked cells"
+  [{:keys [width height filled current-unit] :as board}]
+  {:pre [(valid-position? board)]}
+  { :width width
+    :height height
+    :filled (union filled (:members current-unit))
+    :current-unit nil })
 
 (defn lock-and-spawn
   "Locks the current unit. Clears rows. Moves cells down. Spawns new unit.
