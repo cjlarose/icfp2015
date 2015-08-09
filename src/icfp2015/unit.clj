@@ -1,20 +1,12 @@
 (ns icfp2015.unit
-  (:require [clojure.set :refer [intersection union]]))
+  (:require [clojure.set :refer [intersection union]]
+            [icfp2015.cell :refer [translate-dir]]))
 
-(defn translate [dx dy]
+(defn translate [direction]
   (fn [unit]
-    (let [f (fn [[x y]] [(+ x dx) (+ y dy)])]
+    (let [f (translate-dir direction)]
       { :members (set (map f (:members unit)))
         :pivot (f (:pivot unit)) })))
-
-(def translations
-  { :north [0 -2]
-    :west [-1 0]
-    :east [1 0]
-    :south [0 2]
-    :southwest [0 1]
-    :southeast [1 1]
-})
 
 (defn rotate
   "Rotate a unit around a pivot point"

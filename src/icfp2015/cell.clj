@@ -1,5 +1,21 @@
 (ns icfp2015.cell)
 
+(defn translate [di dj]
+  (fn [[i j]] [(+ i di) (+ j dj)]))
+
+(defn translate-dir [direction]
+  (case direction
+    :west (translate 0 -1)
+    :east (translate 0 1)
+    :southwest (fn [[i j]]
+                 (if (even? i)
+                   ((translate 1 -1) [i j])
+                   ((translate 1 0) [i j])))
+    :southeast (fn [[i j]]
+                 (if (even? i)
+                   ((translate 1 0) [i j])
+                   ((translate 1 1) [i j])))))
+
 (defn offset->cube
   "Convert offset coordinate plane into cube coordinate plane"
   [[row col]]
