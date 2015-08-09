@@ -12,6 +12,11 @@
                  :pivot [ 0 0 ] }
           cmd [:move :southeast]
           mock-ai (constantly cmd)
-          actual-commands (handle-unit mock-ai board unit)
+          [actual-board actual-commands] (handle-unit mock-ai board unit)
+          expected-board {:width 5
+                          :height 6
+                          :filled #{[5 3] [5 2]}
+                          :current-unit nil}
           expected-commands (repeat 6 cmd)]
+      (is (= expected-board actual-board))
       (is (= expected-commands actual-commands)))))

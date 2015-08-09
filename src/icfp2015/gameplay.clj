@@ -18,8 +18,7 @@
     (-> (iterate f [(assoc initial-board :current-unit unit) '()])
         (rest)
         (while-unit-active)
-        (last)
-        (second))))
+        (last))))
 
 ; (defn get-commands
 ;   "Yields a seq of commands given a game and an AI"
