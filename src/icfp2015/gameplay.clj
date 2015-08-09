@@ -11,9 +11,10 @@
             (let [new-command (ai board)
                   new-board (transition-board board new-command)]
               [new-board (conj commands new-command)]))
-        while-unit-active (partial
-                            take-while
-                            (fn [[{:keys [current-unit]} _]] current-unit))]
+        has-current-unit (fn [[{:keys [current-unit]} _]] current-unit)
+        while-unit-active (fn [coll]
+                            (let [[left right] (split-with has-current-unit coll)]
+                              (conj (vec left) (first right))))]
     (-> (iterate f [(assoc initial-board :current-unit unit) '()])
         (rest)
         (while-unit-active)
