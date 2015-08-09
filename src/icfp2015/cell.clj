@@ -1,8 +1,5 @@
 (ns icfp2015.cell)
 
-(defn translate [di dj]
-  (fn [[i j]] [(+ i di) (+ j dj)]))
-
 (defn offset->cube
   "Convert offset coordinate plane into cube coordinate plane"
   [[row col]]
