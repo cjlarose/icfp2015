@@ -25,7 +25,7 @@
 (defn solve-game [game]
   { :problemId (:problemId game)
     :seed (:seed game)
-    :solution (map command-to-letter (get-commands dumb-ai game)) })
+    :solution (apply str (map command-to-letter (get-commands dumb-ai game))) })
 
 (def cli-options
   [["-f" "--file FILE" "Input filename"
