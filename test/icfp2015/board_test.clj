@@ -51,7 +51,19 @@
                            :height 15
                            :filled #{ [ 6 6 ] }
                            :current-unit { :members #{ [ 5 1 ] } :pivot [6 1] } }]
-      (is (= expected-board actual-board)))))
+      (is (= expected-board actual-board))))
+    (testing "locks and spawns"
+      (let [board { :width 3
+                    :height 5
+                    :filled #{ [4 0] [4 1] }
+                    :current-unit { :members #{ [ 4 2 ] [ 3 0 ] }
+                                    :pivot [3 1] } }
+            actual-board (transition-board board [:lock])
+            expected-board { :width 3
+                             :height 5
+                             :filled #{ [4 0] }
+                             :current-unit nil }]
+        (is (= expected-board actual-board)))))
 
 (deftest lock-test
   (let [lock-current-unit #'board/lock-current-unit]
@@ -112,20 +124,4 @@
             expected-board { :width 3
                              :height 5
                              :filled #{ [2 0] [2 2] } } ]
-        (is (= expected-board actual-board))))))
-
-(deftest lock-and-spawn-test
-  (let [lock-and-spawn #'board/lock-and-spawn]
-    (testing "locks and spawns"
-      (let [board { :width 3
-                    :height 5
-                    :filled #{ [4 0] [4 1] }
-                    :current-unit { :members #{ [ 4 2 ] [ 3 0 ] }
-                                    :pivot [3 1] } }
-            new-unit { :members #{ [0 0] } :pivot [ 0 1 ] }
-            actual-board (lock-and-spawn board new-unit)
-            expected-board { :width 3
-                             :height 5
-                             :filled #{ [4 0] }
-                             :current-unit new-unit }]
         (is (= expected-board actual-board))))))

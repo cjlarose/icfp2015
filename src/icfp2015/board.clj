@@ -9,12 +9,12 @@
 ;        :current-unit { :members #{ [2 0] [0 1] [2 2] } :pivot [1 1] }
 ;        :filled #{ [5 4] [4 3] } }
 (defn make-board
-  "Creates a new new board with an initial-unit"
-  [w h filled initial-unit]
+  "Creates a new new board with a nil initial-unit"
+  [w h filled]
   { :width w
     :height h
     :filled filled
-    :current-unit initial-unit })
+    :current-unit nil })
 
 (defn- has-collision?
   "Does the current unit collide with filled cells?"
@@ -56,17 +56,10 @@
         new-filled (reduce remove-row filled filled-rows)]
     (assoc board :filled new-filled)))
 
-(defn- lock-and-spawn
-  "Locks the current unit. Clears rows. Moves cells down. Spawns new unit.
-  New board may be invalid due to spawn"
-  [board new-unit]
-  (let [new-board (clear-rows (lock-current-unit board))]
-    (assoc new-board :current-unit new-unit)))
-
 ; these are possible commands
 ; [ [:move :west] [:move :east] [:move :southwest] [:move :southeast]
 ;   [:rotate :clockwise] [:rotate :counterclockwise]
-;   [:lock next-unit] ]
+;   [:lock] ]
 (defn transition-board
   "Given a board and command, returns a new (possibly invalid) board"
   [board [command arg]]
@@ -76,4 +69,4 @@
                :height (:height board)
                :filled (:filled board)
                :current-unit (unit-fn (:current-unit board)) })
-    :lock (lock-and-spawn board arg)))
+    :lock (clear-rows (lock-current-unit board))))
