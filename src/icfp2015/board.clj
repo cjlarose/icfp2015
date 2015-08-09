@@ -1,5 +1,6 @@
 (ns icfp2015.board
   (:require [clojure.set :refer [intersection union]]
+            [clojure.string :refer [join]]
             [icfp2015.unit :as unit]))
 
 ; board state is represented as a current-unit together with its currently
@@ -56,6 +57,15 @@
                          (set (map (fn [[ii jj]] [(inc ii) jj]) above)))))
         new-filled (reduce remove-row filled filled-rows)]
     (assoc board :filled new-filled)))
+
+(defn board->str [{:keys [width height filled current-unit]}]
+  (let [print-cell (fn [cell]
+                     (cond
+                       (contains? (:members current-unit) cell) "o"
+                       (contains? filled cell) "x"
+                       :else "."))
+        print-row (fn [i] (str (if (odd? i) " " "") (join " " (map print-cell (map (fn [j] [i j]) (range width))))))]
+    (join "\n" (map print-row (range height)))))
 
 ; these are possible commands
 ; [ [:move :west] [:move :east] [:move :southwest] [:move :southeast]
