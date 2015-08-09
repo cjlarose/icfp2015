@@ -61,8 +61,8 @@
 (defn board->str [{:keys [width height filled current-unit]}]
   (let [print-cell (fn [cell]
                      (cond
-                       (contains? (:members current-unit) cell) "o"
-                       (contains? filled cell) "x"
+                       (contains? (:members current-unit) cell) "⬡"
+                       (contains? filled cell) "⬢"
                        :else "."))
         print-row (fn [i] (str (if (odd? i) " " "") (join " " (map print-cell (map (fn [j] [i j]) (range width))))))]
     (join "\n" (map print-row (range height)))))
