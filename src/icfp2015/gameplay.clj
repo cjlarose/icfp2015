@@ -20,17 +20,10 @@
         (while-unit-active)
         (last))))
 
-; (defn get-commands
-;   "Yields a seq of commands given a game and an AI"
-;   [{:keys [width height filled units]} ai]
-;   (let [f (fn [[board commands] unit] 
-;             (let [[new-board addtl-commands] (handle-unit board unit)]
-;               [new-board (concat commands addtl-commands)]))]
-;     (reduce f [(make-board width height filled) '()] units)))
-    
-;; make board
-;; for every unit
-;;   set current unit on board
-;;   until current-until is nil
-;;     feed board into ai 
-;;     append commands to list
+(defn get-commands
+  "Yields a seq of commands given a game and an AI"
+  [ai {:keys [width height filled units]}]
+  (let [f (fn [[board commands] unit]
+            (let [[new-board addtl-commands] (handle-unit ai board unit)]
+              [new-board (concat commands addtl-commands)]))]
+    (second (reduce f [(make-board width height filled) '()] units))))

@@ -20,3 +20,18 @@
           expected-commands (repeat 6 cmd)]
       (is (= expected-board actual-board))
       (is (= expected-commands actual-commands)))))
+
+(deftest get-commands-test
+  (testing "multiple units"
+    (let [game {:width 5
+                :height 6
+                :filled #{}
+                :units [{:members #{[0 0] [0 1]}
+                         :pivot   [0 0]}
+                        {:members #{[0 3] [0 4]}
+                         :pivot   [0 3]}]}
+          cmd [:move :southeast]
+          mock-ai (constantly cmd)
+          actual-commands (get-commands mock-ai game)
+          expected-commands (repeat 8 cmd)]
+      (is (= expected-commands actual-commands)))))
