@@ -1,6 +1,6 @@
 (ns icfp2015.unit
   (:require [clojure.set :refer [intersection union]]
-            [icfp2015.cell :refer [translate-dir]]))
+            [icfp2015.cell :refer [translate-dir rotate-cell]]))
 
 (defn translate [direction]
   (fn [unit]
