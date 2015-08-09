@@ -20,14 +20,14 @@
   "Convert offset coordinate plane into cube coordinate plane"
   [[row col]]
   (let [x (- col (/ (- row (bit-and row 1)) 2))
-        y row
-        z (- (- x) y)]
+        z row
+        y (- (- x) z)]
     [x y z]))
 
 (defn cube->offset
   "Convert cube coordinate place to offset coordinate plane"
   [[x y z]]
-  (let [col (+ x (/ (- y (bit-and y 1)) 2))
-        row y]
+  (let [row z
+        col (+ x (/ (- z (bit-and z 1)) 2))]
     [row col]))
 

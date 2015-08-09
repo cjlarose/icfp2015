@@ -12,13 +12,13 @@
   (testing "convert [1 1] cell"
     (let [cell [1 1]
           actual-cell (offset->cube cell)
-          expected-cell [1 1 -2]]
+          expected-cell [1 -2 1]]
       (is (= expected-cell actual-cell))))
 
   (testing "convert some cell"
     (let [cell [4 -3]
           actual-cell (offset->cube cell)
-          expected-cell [-5 4 1]]
+          expected-cell [-5 1 4]]
       (is (= expected-cell actual-cell)))))
 
 (deftest cube->offset-test
@@ -31,12 +31,12 @@
   (testing "convert [1 1 -2] cell"
     (let [cell [1 1 -2]
           actual-cell (cube->offset cell)
-          expected-cell [1 1]]
+          expected-cell [-2 0]]
       (is (= expected-cell actual-cell))))
 
   (testing "convert some cell"
     (let [cell [-1 5 -2]
           actual-cell (cube->offset cell)
-          expected-cell [5 1]]
+          expected-cell [-2 -2]]
       (is (= expected-cell actual-cell)))))
 
