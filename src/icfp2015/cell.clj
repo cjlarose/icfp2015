@@ -22,9 +22,8 @@
     :southeast [0 -1 1] })
 
 (defn translate-dir [direction]
-  (fn [coords]
-    (->> coords
+  (fn [cell]
+    (->> cell
       (offset->cube)
-      (map + (direction offsets))
-      (vec)
+      (mapv + (direction offsets))
       (cube->offset))))
