@@ -26,10 +26,9 @@
   [pivot direction]
   (fn [cell]
     (mapv + cell
-      (let [pivot (offset->cube pivot)
-          cell  (offset->cube cell)
-          hex-vector (mapv - cell pivot)
-          [x y z] hex-vector]
+      (let [cell (offset->cube cell)
+            pivot (offset->cube pivot)
+            [x y z] (mapv - cell pivot)]
       (cube->offset
         (case direction
           :counterclockwise (mapv - [z x y])
