@@ -13,5 +13,5 @@
           cmd [:move :southeast]
           mock-ai (constantly cmd)
           actual-commands (handle-unit mock-ai board unit)
-          expected-commands (repeat 5 cmd)]
+          expected-commands (repeat 6 cmd)]
       (is (= expected-commands actual-commands)))))
