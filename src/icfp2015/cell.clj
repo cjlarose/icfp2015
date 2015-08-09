@@ -25,14 +25,15 @@
   "Returns a function that rotates a cell around a pivot point"
   [pivot direction]
   (fn [cell]
-    (let [pivot (offset->cube pivot)
+    (mapv + cell
+      (let [pivot (offset->cube pivot)
           cell  (offset->cube cell)
           hex-vector (mapv - cell pivot)
           [x y z] hex-vector]
       (cube->offset
         (case direction
           :counterclockwise (mapv - [z x y])
-          :clockwise (mapv - [y z x]))))))
+          :clockwise (mapv - [y z x])))))))
 
 (defn translate-dir [direction]
   (fn [cell]
