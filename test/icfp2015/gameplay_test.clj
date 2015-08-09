@@ -19,7 +19,20 @@
                           :current-unit nil}
           expected-commands (repeat 6 cmd)]
       (is (= expected-board actual-board))
-      (is (= expected-commands actual-commands)))))
+      (is (= expected-commands actual-commands))))
+  (testing "refuses units if they cannot be spawned"
+    (let [board { :width 5
+                  :height 6
+                  :filled #{ [ 0 0 ] }
+                  :current-unit nil }
+          unit { :members #{ [ 0 0 ] [ 0 1 ] }
+                 :pivot [ 0 0 ] }
+          cmd [:move :southeast]
+          mock-ai (constantly cmd)
+          [actual-board actual-commands] (handle-unit mock-ai board unit)
+          expected-board board]
+      (is (= expected-board actual-board))
+      (is (nil? actual-commands)))))
 
 (deftest get-commands-test
   (testing "multiple units"
