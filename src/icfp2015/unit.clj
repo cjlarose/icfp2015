@@ -18,7 +18,7 @@
 
 (defn rotate
   "Rotate a unit around a pivot point"
-  [rotation, [[pi pj]]]
+  [[[pivot-row p-col]] rotation]
   nil)
 
 (def rotations
