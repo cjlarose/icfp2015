@@ -41,7 +41,8 @@
 
 (defn- clear-rows
   "Clears full rows. Moves cells above cleared row downward"
-  [{:keys [width height filled] :as board}]
+  [{:keys [width height filled current-unit] :as board}]
+  {:pre [(nil? current-unit)]}
   (let [row-is-filled (fn [i] (->> (range width)
                                    (map (fn [j] [i j]))
                                    (every? (partial contains? filled))))
