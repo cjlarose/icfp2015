@@ -15,15 +15,16 @@
         col (+ x (/ (- z (bit-and z 1)) 2))]
     [row col]))
 
-(def offsets { :west [-1 1 0]
-               :east [1 -1 0]
-               :southwest [-1 0 1]
-               :southeast [0 -1 1] })
+(def offsets
+  { :west [-1 1 0]
+    :east [1 -1 0]
+    :southwest [-1 0 1]
+    :southeast [0 -1 1] })
 
 (defn translate-dir [direction]
   (fn [coords]
     (->> coords
-         (offset->cube)
-         (map + (direction offsets))
-         (vec)
-         (cube->offset))))
+      (offset->cube)
+      (map + (direction offsets))
+      (vec)
+      (cube->offset))))
