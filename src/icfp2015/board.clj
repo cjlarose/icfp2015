@@ -74,7 +74,7 @@
   "Given a board and command, returns a new (possibly invalid) board"
   [board [command arg]]
   (let [unit-fn (case command
-                  :rotate (apply unit/rotate (unit/rotations arg))
+                  :rotate (unit/rotate arg)
                   :move (unit/translate arg))
         new-board (update-in board [:current-unit] unit-fn)]
     (if (valid-position? new-board)

@@ -40,3 +40,35 @@
           expected-cell [-2 -2]]
       (is (= expected-cell actual-cell)))))
 
+(deftest rotate-cell-test
+  (testing "cell rotates clockwise around itself"
+    (let [pivot [1 1]
+          cell [1 1]
+          rotate-fn (rotate-cell pivot :clockwise)
+          actual-cell (rotate-fn cell)
+          expected-cell [1 1]]
+      (is (= expected-cell actual-cell))))
+
+  (testing "adjacent cell rotates clockwise"
+    (let [pivot [4 2]
+          cell [5 2]
+          rotate-fn (rotate-cell pivot :clockwise)
+          actual-cell (rotate-fn cell)
+          expected-cell [5 1]]
+      (is (= expected-cell actual-cell))))
+
+  (testing "cell rotates counterclockwise around itself"
+    (let [pivot [1 1]
+          cell [1 1]
+          rotate-fn (rotate-cell pivot :counterclockwise)
+          actual-cell (rotate-fn cell)
+          expected-cell [1 1]]
+      (is (= expected-cell actual-cell))))
+
+  (testing "adjacent cell rotates clockwise"
+    (let [pivot [4 2]
+          cell [5 2]
+          rotate-fn (rotate-cell pivot :counterclockwise)
+          actual-cell (rotate-fn cell)
+          expected-cell [4 3]]
+      (is (= expected-cell actual-cell)))))
