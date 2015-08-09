@@ -1,9 +1,6 @@
 (ns icfp2015.gameplay
   (:require [icfp2015.board :refer [make-board transition-board]]))
 
-; (defprotocol AI
-;   (get-move [board] "Returns a [new board, command] vector"))
-
 (defn handle-unit
   [ai initial-board unit]
   (let [f (fn [[board commands]]
