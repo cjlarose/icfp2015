@@ -18,5 +18,5 @@
                         [new-board cmd]
                         [(board/transition-board board [:lock]) :lock])))
           actual-commands (handle-unit mock-ai board unit)
-          expected-commands (repeat 3 cmd)]
+          expected-commands (repeat 5 cmd)]
       (is (= expected-commands actual-commands)))))

@@ -69,7 +69,7 @@
                :height (:height board)
                :filled (:filled board)
                :current-unit (unit-fn (:current-unit board)) })
-    :move (let [unit-fn (apply unit/translate (unit/translations arg))]
+    :move (let [unit-fn (unit/translate arg)]
              { :width (:width board)
                :height (:height board)
                :filled (:filled board)

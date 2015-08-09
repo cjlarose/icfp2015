@@ -50,7 +50,7 @@
           expected-board { :width 10
                            :height 15
                            :filled #{ [ 6 6 ] }
-                           :current-unit { :members #{ [ 5 1 ] } :pivot [6 1] } }]
+                           :current-unit { :members #{ [ 6 0 ] } :pivot [7 -1] } }]
       (is (= expected-board actual-board))))
     (testing "locks and spawns"
       (let [board { :width 3
