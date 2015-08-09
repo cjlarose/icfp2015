@@ -11,8 +11,8 @@
 (defn cube->offset
   "Convert cube coordinate place to offset coordinate plane"
   [[x y z]]
-  (let [row z
-        col (+ x (/ (- z (bit-and z 1)) 2))]
+  (let [col (+ x (/ (- z (bit-and z 1)) 2))
+        row z]
     [row col]))
 
 (def offsets
@@ -25,14 +25,16 @@
   "Returns a function that rotates a cell around a pivot point"
   [pivot direction]
   (fn [cell]
-    (mapv + cell
-      (let [cell (offset->cube cell)
-            pivot (offset->cube pivot)
-            [x y z] (mapv - cell pivot)]
-      (cube->offset
+    (let [rotator (fn [[x y z]]
         (case direction
-          :counterclockwise (mapv - [z x y])
-          :clockwise (mapv - [y z x])))))))
+          :counterclockwise (mapv - [y z x])
+          :clockwise (mapv - [z x y])))]
+      (->> [cell pivot]
+        (mapv offset->cube)
+        (apply mapv -)
+        (rotator)
+        (cube->offset)
+        (mapv + pivot)))))
 
 (defn translate-dir [direction]
   (fn [cell]
