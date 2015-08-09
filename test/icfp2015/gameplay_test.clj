@@ -12,9 +12,7 @@
           unit { :members #{ [ 0 0 ] [ 0 1 ] }
                  :pivot [ 0 0 ] }
           cmd [:move :southeast]
-          mock-ai (fn [board]
-                    (let [new-board (board/transition-board board cmd)]
-                      [new-board cmd]))
+          mock-ai (constantly cmd)
           actual-commands (handle-unit mock-ai board unit)
           expected-commands (repeat 5 cmd)]
       (is (= expected-commands actual-commands)))))
