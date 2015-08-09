@@ -52,13 +52,13 @@
                            :filled #{ [ 6 6 ] }
                            :current-unit { :members #{ [ 6 0 ] } :pivot [7 -1] } }]
       (is (= expected-board actual-board))))
-    (testing "locks and spawns"
+    (testing "locks"
       (let [board { :width 3
                     :height 5
                     :filled #{ [4 0] [4 1] }
                     :current-unit { :members #{ [ 4 2 ] [ 3 0 ] }
                                     :pivot [3 1] } }
-            actual-board (transition-board board [:lock])
+            actual-board (transition-board board [:move :southeast])
             expected-board { :width 3
                              :height 5
                              :filled #{ [4 0] }

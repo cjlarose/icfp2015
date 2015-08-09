@@ -59,14 +59,14 @@
 
 ; these are possible commands
 ; [ [:move :west] [:move :east] [:move :southwest] [:move :southeast]
-;   [:rotate :clockwise] [:rotate :counterclockwise]
-;   [:lock] ]
+;   [:rotate :clockwise] [:rotate :counterclockwise] ]
 (defn transition-board
   "Given a board and command, returns a new (possibly invalid) board"
   [board [command arg]]
-  (if (= command :lock)
-    (clear-rows (lock-current-unit board))
-    (let [unit-fn (case command
-                    :rotate (apply unit/rotate (unit/rotations arg))
-                    :move (unit/translate arg))]
-      (update-in board [:current-unit] unit-fn))))
+  (let [unit-fn (case command
+                  :rotate (apply unit/rotate (unit/rotations arg))
+                  :move (unit/translate arg))
+        new-board (update-in board [:current-unit] unit-fn)]
+    (if (valid-position? new-board)
+      new-board
+      (clear-rows (lock-current-unit board)))))
