@@ -67,9 +67,6 @@
   (if (= command :lock)
     (clear-rows (lock-current-unit board))
     (let [unit-fn (case command
-          :rotate (apply unit/rotate (unit/rotations arg))
-          :move (unit/translate arg))]
-      { :width (:width board)
-        :height (:height board)
-        :filled (:filled board)
-        :current-unit (unit-fn (:current-unit board))})))
+                    :rotate (apply unit/rotate (unit/rotations arg))
+                    :move (unit/translate arg))]
+      (update-in board [:current-unit] unit-fn))))
