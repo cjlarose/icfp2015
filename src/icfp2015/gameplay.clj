@@ -10,10 +10,15 @@
             ; (println board commands)
             (let [new-command (ai board)
                   new-board (transition-board board new-command)]
-              [new-board (conj commands new-command)]))]
-    (second (last (take-while
-      (fn [[{:keys [current-unit]} _]] current-unit)
-      (rest (iterate f [(assoc initial-board :current-unit unit) '()])))))))
+              [new-board (conj commands new-command)]))
+        while-unit-active (partial
+                            take-while
+                            (fn [[{:keys [current-unit]} _]] current-unit))]
+    (-> (iterate f [(assoc initial-board :current-unit unit) '()])
+        (rest)
+        (while-unit-active)
+        (last)
+        (second))))
 
 ; (defn get-commands
 ;   "Yields a seq of commands given a game and an AI"
