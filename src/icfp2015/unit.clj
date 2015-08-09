@@ -18,7 +18,7 @@
 
 (defn rotate
   "Rotate a unit around a pivot point"
-  [rotation, {:keys [pi pj] :as pivot}]
+  [rotation, [[pi pj]]]
   nil)
 
 (def rotations
