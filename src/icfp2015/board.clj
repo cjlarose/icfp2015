@@ -64,7 +64,13 @@
                        (contains? (:members current-unit) cell) "⬡"
                        (contains? filled cell) "⬢"
                        :else "."))
-        print-row (fn [i] (str (if (odd? i) " " "") (join " " (map print-cell (map (fn [j] [i j]) (range width))))))]
+        print-row (fn [i]
+                    (str
+                      (if (odd? i) " " "")
+                      (->> (range width)
+                           (map (fn [j] [i j]))
+                           (map print-cell)
+                           (join " "))))]
     (join "\n" (map print-row (range height)))))
 
 ; these are possible commands
