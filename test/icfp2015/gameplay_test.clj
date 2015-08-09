@@ -1,6 +1,5 @@
 (ns icfp2015.gameplay-test
   (:require [clojure.test :refer :all]
-            [icfp2015.board :as board]
             [icfp2015.gameplay :refer :all :as gameplay]))
 
 (deftest handle-unit-test
