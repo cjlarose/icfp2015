@@ -14,9 +14,7 @@
           cmd [:move :southeast]
           mock-ai (fn [board]
                     (let [new-board (board/transition-board board cmd)]
-                      (if (board/valid-position? new-board)
-                        [new-board cmd]
-                        [(board/transition-board board [:lock]) :lock])))
+                      [new-board cmd]))
           actual-commands (handle-unit mock-ai board unit)
           expected-commands (repeat 5 cmd)]
       (is (= expected-commands actual-commands)))))
