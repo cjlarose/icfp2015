@@ -64,6 +64,11 @@
   "Given a board and command, returns a new (possibly invalid) board"
   [board [command arg]]
   (case command
+    :rotate (let [unit-fn (apply unit/rotate (unit/rotations arg))]
+             { :width (:width board)
+               :height (:height board)
+               :filled (:filled board)
+               :current-unit (unit-fn (:current-unit board)) })
     :move (let [unit-fn (apply unit/translate (unit/translations arg))]
              { :width (:width board)
                :height (:height board)
