@@ -2,10 +2,9 @@
   (:require [clojure.data.json :as json]
             [clojure.tools.cli :refer [parse-opts]]
             [icfp2015.problem :refer [get-games]]
+            [icfp2015.ai :refer [dumb-ai]]
             [icfp2015.gameplay :refer [get-commands]])
   (:gen-class))
-
-(def dumb-ai (constantly [:move :southeast]))
 
 (defn read-games-from-file [f]
   (-> f
