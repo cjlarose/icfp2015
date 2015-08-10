@@ -34,7 +34,7 @@
   "Returns (count (:sourceSeeds problem)) games given a problem."
   [problem]
   (let [n (:sourceLength problem)
-        coord-to-vec (fn [{ :keys [x y] }] [x y])
+        coord-to-vec (fn [{ :keys [x y] }] [y x])
         format-unit (fn [{ :keys [members pivot] }]
                       { :members (set (map coord-to-vec members))
                         :pivot (coord-to-vec pivot) })
