@@ -17,8 +17,15 @@
     :filled filled
     :current-unit nil })
 
-(defn spawn-unit [{:keys [width] :as board} unit]
-  (assoc board :current-unit unit))
+(defn spawn-unit [{:keys [width] :as board} {:keys [members pivot] :as unit}]
+  (let [[li lj] (apply min-key first members)
+        [ri rj] (apply max-key first members)
+        unit-width (- rj lj)
+        remaining-cols (- width unit-width)
+        new-lj (quot remaining-cols 2)
+        dj (- new-lj lj)
+        translated-unit ((unit/translate 0 dj) unit)]
+    (assoc board :current-unit translated-unit)))
 
 (defn- has-collision?
   "Does the current unit collide with filled cells?"
