@@ -32,30 +32,30 @@
                              :height 15
                              :problemId 124
                              :seed 0
-                             :filled #{[5 4] [6 2]}
-                             :units '({ :members #{ [0 5] [1  2] } :pivot [0 0] }
-                                      { :members #{ [0 5] [1  2] } :pivot [0 0] }
-                                      { :members #{ [0 5] [1  2] } :pivot [0 0] }
-                                      { :members #{ [0 5] [1  2] } :pivot [0 0] }
-                                      { :members #{ [5 2] [0  1] } :pivot [0 1] }) }
+                             :filled #{[4 5] [2 6]}
+                             :units '({ :members #{ [5 0] [2  1] } :pivot [0 0] }
+                                      { :members #{ [5 0] [2  1] } :pivot [0 0] }
+                                      { :members #{ [5 0] [2  1] } :pivot [0 0] }
+                                      { :members #{ [5 0] [2  1] } :pivot [0 0] }
+                                      { :members #{ [2 5] [1  0] } :pivot [1 0] }) }
                            { :width 10
                              :height 15
                              :problemId 124
                              :seed 17
-                             :filled #{[5 4] [6 2]}
-                             :units '({ :members #{ [0 5] [1  2] } :pivot [0 0] }
-                                      { :members #{ [4 7] [11 8] } :pivot [4 2] }
-                                      { :members #{ [0 5] [1  2] } :pivot [0 0] }
-                                      { :members #{ [5 2] [0  1] } :pivot [0 1] }
-                                      { :members #{ [4 7] [11 8] } :pivot [4 2] }) }
+                             :filled #{[4 5] [2 6]}
+                             :units '({ :members #{ [5 0] [2 1 ] } :pivot [0 0] }
+                                      { :members #{ [7 4] [8 11] } :pivot [2 4] }
+                                      { :members #{ [5 0] [2 1 ] } :pivot [0 0] }
+                                      { :members #{ [2 5] [1 0 ] } :pivot [1 0] }
+                                      { :members #{ [7 4] [8 11] } :pivot [2 4] }) }
                            { :width 10
                              :height 15
                              :problemId 124
                              :seed 5235
-                             :filled #{[5 4] [6 2]}
-                             :units '({ :members #{ [0 5] [1  2] } :pivot [0 0] }
-                                      { :members #{ [5 2] [0  1] } :pivot [0 1] }
-                                      { :members #{ [4 7] [11 8] } :pivot [4 2] }
-                                      { :members #{ [1 4] [11 6] } :pivot [6 1] }
-                                      { :members #{ [5 2] [0  1] } :pivot [0 1] }) } ]]
+                             :filled #{[4 5] [2 6]}
+                             :units '({ :members #{ [5 0] [2 1 ] } :pivot [0 0] }
+                                      { :members #{ [2 5] [1 0 ] } :pivot [1 0] }
+                                      { :members #{ [7 4] [8 11] } :pivot [2 4] }
+                                      { :members #{ [4 1] [6 11] } :pivot [1 6] }
+                                      { :members #{ [2 5] [1 0 ] } :pivot [1 0] }) } ]]
       (is (= expected-games actual-games)))))
