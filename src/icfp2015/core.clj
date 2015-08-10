@@ -2,7 +2,7 @@
   (:require [clojure.data.json :as json]
             [clojure.tools.cli :refer [parse-opts]]
             [icfp2015.problem :refer [get-games]]
-            [icfp2015.ai :refer [slightly-smarter-ai]]
+            [icfp2015.ai :refer [dumb-ai]]
             [icfp2015.gameplay :refer [get-commands]])
   (:gen-class))
 
@@ -24,7 +24,7 @@
 (defn solve-game [game]
   { :problemId (:problemId game)
     :seed (:seed game)
-    :solution (apply str (map command-to-letter (get-commands slightly-smarter-ai game))) })
+    :solution (apply str (map command-to-letter (get-commands dumb-ai game))) })
 
 (def cli-options
   [["-f" "--file FILE" "Input filename"
