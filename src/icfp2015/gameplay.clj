@@ -1,5 +1,5 @@
 (ns icfp2015.gameplay
-  (:require [icfp2015.board :refer [board->str make-board transition-board valid-position?]]))
+  (:require [icfp2015.board :refer [board->str make-board spawn-unit transition-board valid-position?]]))
 
 (def DEBUG false)
 
@@ -18,7 +18,7 @@
         while-unit-active (fn [coll]
                             (let [[left right] (split-with has-current-unit coll)]
                               (conj (vec left) (first right))))
-        board-with-spawn (assoc initial-board :current-unit unit)]
+        board-with-spawn (spawn-unit initial-board unit)]
     (if (valid-position? board-with-spawn)
       (-> (iterate f [board-with-spawn '()])
           (rest)

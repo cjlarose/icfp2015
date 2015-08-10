@@ -17,6 +17,9 @@
     :filled filled
     :current-unit nil })
 
+(defn spawn-unit [{:keys [width] :as board} unit]
+  (assoc board :current-unit unit))
+
 (defn- has-collision?
   "Does the current unit collide with filled cells?"
   [{:keys [filled current-unit]}]
