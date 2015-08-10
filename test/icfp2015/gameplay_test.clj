@@ -15,7 +15,7 @@
           [actual-board actual-commands] (handle-unit mock-ai board unit)
           expected-board {:width 5
                           :height 6
-                          :filled #{[5 3] [5 2]}
+                          :filled #{[5 4] [5 3]}
                           :current-unit nil}
           expected-commands (repeat 6 cmd)]
       (is (= expected-board actual-board))
@@ -23,7 +23,7 @@
   (testing "refuses units if they cannot be spawned"
     (let [board { :width 5
                   :height 6
-                  :filled #{ [ 0 0 ] }
+                  :filled #{ [ 0 2 ] }
                   :current-unit nil }
           unit { :members #{ [ 0 0 ] [ 0 1 ] }
                  :pivot [ 0 0 ] }
@@ -46,5 +46,5 @@
           cmd [:move :southeast]
           mock-ai (constantly cmd)
           actual-commands (get-commands mock-ai game)
-          expected-commands (repeat 8 cmd)]
+          expected-commands (repeat 11 cmd)]
       (is (= expected-commands actual-commands)))))
