@@ -2,14 +2,14 @@
   (:require [clojure.set :refer [intersection union]]
             [icfp2015.cell :refer [translate-dir rotate-cell]]))
 
+(defn- move [unit f]
+  { :members (set (map f (:members unit)))
+    :pivot (f (:pivot unit)) })
+
 (defn translate [direction]
   (fn [unit]
-    (let [f (translate-dir direction)]
-      { :members (set (map f (:members unit)))
-        :pivot (f (:pivot unit)) })))
+    (move unit (translate-dir direction))))
 
 (defn rotate [direction]
   (fn [unit]
-    (let [f (rotate-cell (:pivot unit) direction)]
-      { :members (set (map f (:members unit)))
-        :pivot (f (:pivot unit)) })))
+    (move unit (rotate-cell (:pivot unit) direction))))
