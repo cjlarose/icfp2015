@@ -6,9 +6,11 @@
   { :members (set (map f (:members unit)))
     :pivot (f (:pivot unit)) })
 
-(defn translate [direction]
-  (fn [unit]
-    (move unit (translate-dir direction))))
+(defn translate
+  ([direction] (fn [unit]
+                 (move unit (translate-dir direction))))
+  ([di dj] (fn [unit]
+             (move unit (fn [cell] (mapv + cell [di dj]))))))
 
 (defn rotate [direction]
   (fn [unit]
