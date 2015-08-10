@@ -1,9 +1,16 @@
 (ns icfp2015.gameplay
-  (:require [icfp2015.board :refer [make-board transition-board valid-position?]]))
+  (:require [icfp2015.board :refer [board->str make-board transition-board valid-position?]]))
+
+(def DEBUG false)
 
 (defn handle-unit
   [ai initial-board unit]
   (let [f (fn [[board commands]]
+            (if DEBUG
+              (do
+                (println (board->str board))
+                (println)
+                (Thread/sleep 100)))
             (let [new-command (ai board)
                   new-board (transition-board board new-command)]
               [new-board (conj commands new-command)]))
@@ -25,6 +32,10 @@
   (loop [board (make-board width height filled)
          commands '() ; TODO: use vector
          remaining-units units]
+    (if DEBUG
+      (do
+        (println (board->str board))
+        (println)))
     (if (empty? remaining-units)
       commands
       (let [current-unit (first remaining-units)
