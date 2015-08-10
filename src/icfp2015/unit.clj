@@ -7,10 +7,10 @@
     :pivot (f (:pivot unit)) })
 
 (defn translate
-  ([direction] (fn [unit]
-                 (move unit (translate-dir direction))))
-  ([di dj] (fn [unit]
-             (move unit (fn [cell] (mapv + cell [di dj]))))))
+  ([direction]
+    (fn [unit] (move unit (translate-dir direction))))
+  ([di dj]
+    (fn [unit] (move unit (fn [cell] (mapv + cell [di dj]))))))
 
 (defn rotate [direction]
   (fn [unit]
