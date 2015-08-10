@@ -125,3 +125,22 @@
                              :height 5
                              :filled #{ [2 0] [2 2] } } ]
         (is (= expected-board actual-board))))))
+
+(deftest spawn-unit-test
+  (testing "single-cell unit is spawned in the center of the board"
+    (let [board { :width 5 :height 5 :current-unit nil }
+          unit  { :members #{ [0 0] } :pivot [0 1]}
+          actual-board (spawn-unit board unit)
+          expected-board { :width 5
+                           :height 5
+                           :current-unit { :members #{ [0 2] } :pivot [0 3] } }]
+      (is (= expected-board actual-board))))
+
+  (testing "two-cell unit is spawned left-of-center in the board"
+    (let [board { :width 7 :height 5 :current-unit nil }
+          unit  { :members #{ [0 0] [0 1] } :pivot [0 1]}
+          actual-board (spawn-unit board unit)
+          expected-board { :width 7
+                           :height 5
+                           :current-unit { :members #{ [0 2] [0 3] } :pivot [0 3] } }]
+      (is (= expected-board actual-board)))))

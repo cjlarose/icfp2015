@@ -18,9 +18,9 @@
     :current-unit nil })
 
 (defn spawn-unit [{:keys [width] :as board} {:keys [members pivot] :as unit}]
-  (let [[li lj] (apply min-key first members)
-        [ri rj] (apply max-key first members)
-        unit-width (- rj lj)
+  (let [[_ lj] (apply min-key second members)
+        [_ rj] (apply max-key second members)
+        unit-width (inc (- rj lj))
         remaining-cols (- width unit-width)
         new-lj (quot remaining-cols 2)
         dj (- new-lj lj)
