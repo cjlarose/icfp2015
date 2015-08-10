@@ -1,5 +1,5 @@
 (ns icfp2015.gameplay
-  (:require [icfp2015.board :refer [board->str make-board spawn-unit transition-board valid-position?]]))
+  (:require [icfp2015.board :as board]))
 
 (def DEBUG false)
 
@@ -8,18 +8,18 @@
   (let [f (fn [[board commands]]
             (if DEBUG
               (do
-                (println (board->str board))
+                (println (board/board->str board))
                 (println)
                 (Thread/sleep 100)))
             (let [new-command (ai board)
-                  new-board (transition-board board new-command)]
+                  new-board (board/transition-board board new-command)]
               [new-board (conj commands new-command)]))
         has-current-unit (fn [[{:keys [current-unit]} _]] current-unit)
         while-unit-active (fn [coll]
                             (let [[left right] (split-with has-current-unit coll)]
                               (conj (vec left) (first right))))
-        board-with-spawn (spawn-unit initial-board unit)]
-    (if (valid-position? board-with-spawn)
+        board-with-spawn (board/spawn-unit initial-board unit)]
+    (if (board/valid-position? board-with-spawn)
       (-> (iterate f [board-with-spawn '()])
           (rest)
           (while-unit-active)
@@ -29,12 +29,12 @@
 (defn get-commands
   "Yields a seq of commands given a game and an AI"
   [ai {:keys [width height filled units]}]
-  (loop [board (make-board width height filled)
+  (loop [board (board/make-board width height filled)
          commands '() ; TODO: use vector
          remaining-units units]
     (if DEBUG
       (do
-        (println (board->str board))
+        (println (board/board->str board))
         (println)))
     (if (empty? remaining-units)
       commands
