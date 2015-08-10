@@ -14,7 +14,7 @@
       (get-games)))
 
 (defn command-to-letter [command]
-  (case
+  (case command
     [:move :west] \p
     [:move :east] \b
     [:move :southwest] \a

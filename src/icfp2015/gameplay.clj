@@ -30,5 +30,5 @@
       (let [current-unit (first remaining-units)
             [new-board addtl-commands] (handle-unit ai board current-unit)]
         (if addtl-commands
-          (recur board (concat commands addtl-commands) (rest remaining-units))
+          (recur new-board (concat commands addtl-commands) (rest remaining-units))
           commands)))))
